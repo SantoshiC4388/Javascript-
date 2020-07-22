@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+	<html lang="en">
+	
+		<head>
+			
+			<title>Chat Box</title>
+			
+			<meta charset="utf-8" >
+			
+			<link rel="stylesheet" href="styleCB.css">
+			
+			
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+			
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+			
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			
+		
+		</head>
+		
+		<body>
+				<div class="container">
+					
+					<div class="row">
+					
+						<div class="class1">
+			
+							<div id="list1">
+								<h2>Chat Members</h2>
+								
+								
+								<table class="table table-striped table-hover" id="t1">
+									<thead></thead>
+									<tbody id="tb1"></tbody>
+								<table>
+								
+								
+							</div>
+						
+						
+						
+						
+						</div>
+						
+							<div class="openChat">
+								<form id="form1">
+								</form>
+							</div>
+								
+						
+						
+						</div>
+						
+							
+					</div>
+				</div>
+			
+			
+			
+			
+			
+		
+			<script>
+				
+				
+				var user=[{"fname": "John", "lname": "Doe","age": 25, "src": "Tulips.jpg" },
+						{"fname": "Sam", "lname": "Roxy","age": 10, "src": "Penguins.jpg"},
+						{"fname": "Ria", "lname": "Kumar","age": 16, "src": "Tulips.jpg"},
+						{"fname": "Sana", "lname": "Khan","age": 45, "src": "Penguins.jpg"},
+						{"fname": "Zen", "lname": "Mir","age": 75, "src": "Tulips.jpg"}
+						];
+				
+				var userCheck ={
+				
+					check: function() {
+						
+						return this.fname;
+					}
+				}
+				
+				function openForm(obj)
+						{
+							
+							
+					
+							myForm=document.getElementById("form1");
+							
+							textarea1=document.createElement("textarea");
+							textarea1.setAttribute("rows",15);
+							text1=document.createElement("input");
+							text1.setAttribute("type","text");
+							text1.setAttribute("placeholder","Type Message");
+							myForm.appendChild(textarea1);
+							myForm.appendChild(text1);
+							
+							butn1=document.createElement("button");
+							butnnode1=document.createTextNode("Send");
+							butn1.addEventListener("click",sendForm);
+							butn2=document.createElement("button");
+							butnnode2=document.createTextNode("Close");
+							butn2.addEventListener("click",closeForm);
+							myForm.appendChild(butn1);
+							myForm.appendChild(butn2); 
+							butn1.appendChild(butnnode1);
+							butn2.appendChild(butnnode2);
+							butn1.style.backgroundColor="blue";
+							butn2.style.backgroundColor="red";
+							butn1.style.color="white";
+							butn2.style.color="white";
+							butn1.style.display="block";
+							
+							document.querySelector(".openChat").style.display="inline";
+							
+							 textarea1.defaultValue="Hello" + JSON.stringify(obj);
+							
+							/*if (textarea1.value!="Hello")
+							{
+								
+								document.getElementById("myTextArea").value=" ";
+								
+							} */
+					}
+				
+				
+				
+				
+				function closeForm()
+				{
+					myForm.style.display="none";
+				}
+				
+				
+				function sendForm()
+				{
+					
+					textarea1.value+=text1.value;
+					text1.value="";
+				}
+				
+				
+				
+				
+				
+				for(var i=0; i<user.length; i++)
+				{
+					var x, txt="", name=[];
+					for(x in user[i])
+						{
+							if(x=="src")
+							{
+								
+								var source=user[i][x];
+								
+							}
+							else {
+									txt+=user[i][x]+" ";
+								}
+							
+						}
+					
+				
+					var image=document.createElement("img");
+					image.src=source;
+					var butn=document.createElement("button");
+					var btnnode=document.createTextNode("Chat");
+					var link=document.createElement("a");
+					var node=document.createTextNode(txt);
+					link.appendChild(node);
+					butn.appendChild(btnnode);
+					link.title=txt;
+					link.href="#";
+					var element=document.getElementById("t1");
+					var rownode=document.createElement("tr");
+					var cellnode=document.createElement("td");
+					element.appendChild(rownode);
+					rownode.appendChild(cellnode);
+					cellnode.appendChild(image);
+					cellnode.appendChild(link);	
+					cellnode.appendChild(butn);
+					var list=element.getElementsByTagName("a");
+					list[i].style.textDecoration="none";
+					list[i].style.display="inline";
+					//butn.addEventListener("click",openForm);
+					
+					
+					name[i]=userCheck.check.call(user[i]);
+					//console.log(name[i]);
+					butn.addEventListener("click",myFunction(name[i]));
+			}
+				
+				
+			
+				
+				
+				
+				var showCount = (function () {
+						var count=0;
+						return function () { count++;  return count;}							
+				}) ();
+				
+				
+				function myFunction(obj)
+				{
+					var n=obj;
+					openForm(n);
+				
+				}
+				
+				document.querySelector(".openChat").style.display="none";
+				
+				
+				
+				
+					
+				
+				
+			</script>
+				
+		</body>
+		
+	
+	</html>
